@@ -1,0 +1,17 @@
+<h1>Designs</h1>
+
+<% if File.exists?("designs.json") %>
+  <% designs = JSON.parse(File.read("designs.json")) %>
+  <ul>
+    <% designs.each do |key, design| %>
+      <li>
+        <a href="designs/<%= design["name"].parameterize %>"><%= design["name"] %></a>
+        <% if design["instructions"].present? %>
+          <p><%= design["instructions"] %></p>
+        <% end if%>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  Run: <code>rails g design &lt;DESIGN&gt; [&lt;INSTRUCTIONS&gt;]</code> to add a new design
+<% end %>
